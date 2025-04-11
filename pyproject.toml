@@ -1,0 +1,11 @@
+[project]
+name = "astro-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "astronomer-cosmos==1.6.0",
+    "dbt-core>=1.9.4",
+    "dbt-duckdb==1.8.2",
+]
