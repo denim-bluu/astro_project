@@ -5,7 +5,17 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "apache-airflow-providers-snowflake>=5.5.1",
     "astronomer-cosmos==1.6.0",
     "dbt-core>=1.9.4",
     "dbt-duckdb==1.8.2",
+    "dbt-snowflake>=1.9.2",
+    "pandas>=2.2.3",
+    "snowflake-connector-python>=3.14.0",
+    "yfinance>=0.2.55",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "ptpython>=3.0.29",
 ]

@@ -1,0 +1,31 @@
+# models/marts/schema.yml
+
+version: 2
+
+models:
+  - name: daily_stock_summary
+    description: Aggregated daily stock summary table including previous day close and daily change calculations. Materialized as a table.
+    columns:
+      - name: stock_day_id
+        description: Surrogate key generated from ticker symbol and date. Primary key.
+        tests:
+          - unique
+          - not_null
+      - name: price_date
+        description: The date of the stock record.
+      - name: ticker_symbol
+        description: Stock ticker symbol.
+      - name: open_price
+      - name: high_price
+      - name: low_price
+      - name: close_price
+      - name: adjusted_close_price
+      - name: prev_day_adj_close
+        description: Adjusted close price from the previous trading day.
+      - name: daily_change_abs
+        description: Absolute change in adjusted close price from the previous day.
+      - name: daily_change_pct
+        description: Percentage change in adjusted close price from the previous day.
+      - name: volume
+      - name: load_timestamp
+        description: Timestamp when the underlying raw data was loaded.

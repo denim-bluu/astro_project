@@ -1,0 +1,38 @@
+# dbt/yahoo_finance_dbt/dbt_project.yml
+name: "yahoo_finance"
+version: "1.0.0"
+config-version: 2
+
+# Specifies the profile name this project uses from profiles.yml
+# Ensure this matches a profile defined below or in a shared profiles.yml
+profile: "yahoo_finance_profile"
+
+# Define paths for models, seeds, tests, etc., relative to this file
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+analysis-paths: ["analysis"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+    - "target"
+    - "dbt_modules"
+    - "logs"
+
+models:
+  yahoo_finance: # Must match the 'name' of the project above
+    materialized: table
+    staging:
+      # Models under models/staging/ will be views by default
+      materialized: table
+      schema: staging # Optional: Default output schema for staging models
+      tags: ["staging", "yahoo"]
+    marts:
+      # Models under models/marts/ will be tables by default
+      materialized: table
+      schema: analytics # Optional: Default output schema for mart models
+      tags: ["mart", "yahoo"]
+
+# Require a specific dbt version range (adapt as needed)
+require-dbt-version: [">=1.0.0", "<2.0.0"]
