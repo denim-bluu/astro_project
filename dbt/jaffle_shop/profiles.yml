@@ -7,7 +7,7 @@ my-snowflake-db:
 
       # User/password auth
       user: MIGOJIPSA
-      password: Sjfksrjs1158411!
+      password: ---!
 
       role: ACCOUNTADMIN
       database: dbt_dev
