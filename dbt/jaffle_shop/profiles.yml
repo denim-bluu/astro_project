@@ -2,6 +2,7 @@ my-snowflake-db:
   target: dev
   outputs:
     dev:
+      type: snowflake
       account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}" # e.g., xy12345.east-us-2.azure
 
       # --- Choose ONE authentication method ---
@@ -19,3 +20,6 @@ my-snowflake-db:
       database: "{{ env_var('SNOWFLAKE_DATABASE') }}" # Target database for dbt models (e.g., DBT_PROD, ANALYTICS)
       warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}" # Warehouse dbt should use (e.g., DBT_WH)
       schema: "{{ env_var('SNOWFLAKE_SCHEMA') }}" # Default target schema if not specified in models (e.g., DBT_USER_DEV, ANALYTICS)
+
+      threads: 4 # Number of parallel threads dbt can use
+      client_session_keep_alive: False
