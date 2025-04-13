@@ -2,14 +2,20 @@ my-snowflake-db:
   target: dev
   outputs:
     dev:
-      type: snowflake
-      account: KHDNDBB-YV88688
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}" # e.g., xy12345.east-us-2.azure
 
-      # User/password auth
-      user: MIGOJIPSA
-      password: ---!
+      # --- Choose ONE authentication method ---
+      # 1. User/Password (Less Recommended for Production)
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
 
-      role: ACCOUNTADMIN
-      database: dbt_dev
-      warehouse: COMPUTE_WH
-      schema: dbt_joonkang_dev
+      # 2. Key Pair (Recommended for Production)
+      # user: "{{ env_var('SNOWFLAKE_USER') }}"
+      # private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PATH') }}" # Path accessible by dbt runner
+      # private_key_passphrase: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PASSPHRASE', '') }}" # Optional
+
+      # --- Common Settings ---
+      role: "{{ env_var('SNOWFLAKE_ROLE') }}" # Role dbt should use
+      database: "{{ env_var('SNOWFLAKE_DATABASE') }}" # Target database for dbt models (e.g., DBT_PROD, ANALYTICS)
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}" # Warehouse dbt should use (e.g., DBT_WH)
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA') }}" # Default target schema if not specified in models (e.g., DBT_USER_DEV, ANALYTICS)
