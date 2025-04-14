@@ -1,3 +1,7 @@
+{{ config(
+    full_refresh = true
+) }}
+
 with source_data as (
 
     select

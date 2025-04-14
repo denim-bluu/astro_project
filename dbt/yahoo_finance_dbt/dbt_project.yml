@@ -21,17 +21,18 @@ clean-targets:
     - "logs"
 
 models:
-  yahoo_finance: # Must match the 'name' of the project above
+  +persist_docs:
+    relation: true
+    columns: true
+  yahoo_finance:
     materialized: table
     staging:
-      # Models under models/staging/ will be views by default
       materialized: table
-      schema: staging # Optional: Default output schema for staging models
+      schema: staging
       tags: ["staging", "yahoo"]
     marts:
-      # Models under models/marts/ will be tables by default
       materialized: table
-      schema: analytics # Optional: Default output schema for mart models
+      schema: analytics
       tags: ["mart", "yahoo"]
 
 # Require a specific dbt version range (adapt as needed)

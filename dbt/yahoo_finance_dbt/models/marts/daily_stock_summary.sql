@@ -1,3 +1,8 @@
+{{ config(
+    full_refresh = true
+) }}
+
+
 with staging as (
 
     select * from {{ ref('stg_yahoo_price_history') }}

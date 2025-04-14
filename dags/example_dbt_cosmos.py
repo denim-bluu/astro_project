@@ -5,6 +5,10 @@ from cosmos import DbtDag, ProjectConfig, ProfileConfig
 
 from include.constants import jaffle_shop_path, venv_execution_config
 
+#If your entire workflow is just running the dbt project and nothing else needs to 
+# happen before or after within the same scheduled run, DbtDag offers a slightly simpler 
+# setup as it handles the DAG creation boilerplate for you. However, for most real-world 
+# ETL/ELT pipelines, the flexibility of DbtTaskGroup is highly advantageous.
 dbt_cosmos_dag = DbtDag(
     # dbt/cosmos-specific parameters
     project_config=ProjectConfig(jaffle_shop_path),

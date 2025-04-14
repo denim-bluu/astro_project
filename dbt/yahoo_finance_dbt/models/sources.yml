@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: yahoo_raw # This name is used in the {{ source() }} function
+    description: Raw data loaded from Yahoo Finance API via Airflow pipeline.
+    # Specify the database and schema where the raw table lives
+    # Use env_var for flexibility if these might change between environments
+    database: "{{ env_var('YAHOO_RAW_DATABASE', 'dbt_dev') }}"
+    schema: "{{ env_var('YAHOO_RAW_SCHEMA', 'YAHOO_FINANCE') }}"
+    tables:
+      - name: PRICE_HISTORY
+        description: Raw daily stock price history records.
+        loaded_at_field: LoadTimestamp
+        columns:
+          - name: DATE
+            description: The date of the stock record (Timestamp).
+          - name: OPEN
+          - name: HIGH
+          - name: Low
+          - name: Close
+          - name: Adj Close
+            description: Adjusted close price for dividends and stock splits.
+          - name: Volume
+          - name: Ticker
+            description: Stock ticker symbol.
+          - name: LoadTimestamp
+            description: UTC timestamp when the record was loaded into Snowflake.
